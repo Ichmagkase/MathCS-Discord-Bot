@@ -1,0 +1,24 @@
+{
+  "name": "mathcs-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for the MathCS discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ichmagkase/MathCS-Discord-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Ichmagkase/MathCS-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/Ichmagkase/MathCS-Discord-Bot#readme",
+  "devDependencies": {
+    "@types/node": "^24.5.0"
+  }
+}
