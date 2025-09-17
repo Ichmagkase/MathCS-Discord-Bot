@@ -3,10 +3,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import config from "./config.json" with { type: "json" };
 import { Client, Collection, Events, GatewayIntentBits, MessageFlags } from "discord.js";
-const __filename = import.meta.filename
+// const __filename = import.meta.filename
 const __dirname = import.meta.dirname
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds]});
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, 'commands');
@@ -26,8 +26,26 @@ for (const folder of commandFolders) {
   }
 }
 
-client.on(Events.InteractionCreate, interaction => {
-  console.log(interaction);
+client.on(Events.InteractionCreate, async interaction => {
+  if (!interaction.isChatInputCommand()) return;
+
+  const command = interaction.client.commands.get(interaction.commandName);
+
+  if (!command) {
+    console.error('No command matching ${interaction.commandName} was found')
+    return;
+  }
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    if (interaction.replied || interaction.deferred) {
+      await interaction.followUp({ content: "There was an error while executing this command", flags: MessageFlags.Ephemeral })
+    } else {
+      await interaction.reply({ content: "There was an error while executing this command", flags: MessageFlags.Ephemeral })
+    }
+  }
 })
 
 client.once(Events.ClientReady, readyClient => {

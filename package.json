@@ -4,6 +4,7 @@
   "description": "Discord bot for the MathCS discord",
   "main": "index.js",
   "scripts": {
+    "deploy-commands": "node deploy-commands.js",
     "start": "ts-node index.ts"
   },
   "repository": {
