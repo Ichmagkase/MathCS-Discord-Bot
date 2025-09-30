@@ -1,0 +1,4 @@
+Slash commands need 3 things: 
+- command file 
+- command handler
+- command deployment script
